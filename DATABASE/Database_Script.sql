@@ -1,22 +1,11 @@
-﻿-- 0. Forcefully delete the old database if it is stuck
-USE master;
-GO
-
-IF DB_ID('SDG2_ZeroHungerDB') IS NOT NULL
-BEGIN
-    ALTER DATABASE SDG2_ZeroHungerDB SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-    DROP DATABASE SDG2_ZeroHungerDB;
-END
-GO
-
--- Create the fresh main database
+-- Create the main database
 CREATE DATABASE SDG2_ZeroHungerDB;
 GO
 
 USE SDG2_ZeroHungerDB;
 GO
 
--- 1. Users Table (For FR4 Login System)
+-- 1. Users Table
 CREATE TABLE Users (
     user_id INT IDENTITY(1,1) PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -29,8 +18,16 @@ VALUES ('staff', 'staff123', 'Standard User'),
        ('admin', 'admin123', 'Admin');
 GO
 
--- 2. Inventory Table (Updated to match VB code)
-CREATE TABLE Inventory (
+-- 2. Donors Table (Updated to IDENTITY)
+CREATE TABLE Donors (
+    donor_id INT IDENTITY(1,1) PRIMARY KEY,
+    donor_name VARCHAR(100) NOT NULL,
+    donor_email VARCHAR(100) UNIQUE,
+    join_date DATE NOT NULL
+);
+
+-- 3. FoodInventory Table (Updated to IDENTITY and kept CHECK constraint)
+CREATE TABLE FoodInventory (
     item_id INT IDENTITY(1,1) PRIMARY KEY,
     item_name VARCHAR(100) NOT NULL,
     category VARCHAR(50),
@@ -40,8 +37,8 @@ CREATE TABLE Inventory (
 );
 GO
 
--- 3. DonationLogs Table (Updated for simple textbox inputs)
-CREATE TABLE DonationLogs (
+-- 4. DonationsLogs Table (Updated to IDENTITY and GETDATE)
+CREATE TABLE DonationsLogs (
     log_id INT IDENTITY(1,1) PRIMARY KEY,
     item_name VARCHAR(100) NOT NULL,
     quantity_donated INT NOT NULL,
@@ -71,3 +68,8 @@ FROM
 WHERE 
     DATEDIFF(day, GETDATE(), expiration_date) < 30;
 GO
+
+-- run this line of code to check users
+USE SDG2_ZeroHungerDB;
+
+SELECT * FROM Users;
