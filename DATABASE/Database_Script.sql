@@ -14,7 +14,8 @@ CREATE TABLE Users (
 );
 -- Add the admin account immediately after making the table
 INSERT INTO Users (username, password_hash, user_role) 
-VALUES ('staff', 'staff123', 'Standard User');
+VALUES ('staff', 'staff123', 'Standard User'),
+       ('admin', 'admin123', 'Admin');
 GO
 
 -- 2. Donors Table (Updated to IDENTITY)
