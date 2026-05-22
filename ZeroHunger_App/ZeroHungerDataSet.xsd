@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ZeroHungerDataSet" targetNamespace="http://tempuri.org/ZeroHungerDataSet.xsd" xmlns:mstns="http://tempuri.org/ZeroHungerDataSet.xsd" xmlns="http://tempuri.org/ZeroHungerDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="SDG2_ZeroHungerDBConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="SDG2_ZeroHungerDBConnectionString (MySettings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.ZeroHunger_App.My.MySettings.GlobalReference.Default.SDG2_ZeroHungerDBConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="View_ExpiringStockTableAdapter" GeneratorDataComponentClassName="View_ExpiringStockTableAdapter" Name="View_ExpiringStock" UserDataComponentName="View_ExpiringStockTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="SDG2_ZeroHungerDBConnectionString (MySettings)" DbObjectName="SDG2_ZeroHungerDB.dbo.View_ExpiringStock" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT item_name, expiration_date, stock_quantity FROM dbo.View_ExpiringStock</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="item_name" DataSetColumn="item_name" />
+              <Mapping SourceColumn="expiration_date" DataSetColumn="expiration_date" />
+              <Mapping SourceColumn="stock_quantity" DataSetColumn="stock_quantity" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ZeroHungerDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="ZeroHungerDataSet" msprop:Generator_DataSetName="ZeroHungerDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="View_ExpiringStock" msprop:Generator_RowEvHandlerName="View_ExpiringStockRowChangeEventHandler" msprop:Generator_RowDeletedName="View_ExpiringStockRowDeleted" msprop:Generator_RowDeletingName="View_ExpiringStockRowDeleting" msprop:Generator_RowEvArgName="View_ExpiringStockRowChangeEvent" msprop:Generator_TablePropName="View_ExpiringStock" msprop:Generator_RowChangedName="View_ExpiringStockRowChanged" msprop:Generator_RowChangingName="View_ExpiringStockRowChanging" msprop:Generator_TableClassName="View_ExpiringStockDataTable" msprop:Generator_RowClassName="View_ExpiringStockRow" msprop:Generator_TableVarName="tableView_ExpiringStock" msprop:Generator_UserTableName="View_ExpiringStock">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="item_name" msprop:Generator_ColumnPropNameInRow="item_name" msprop:Generator_ColumnPropNameInTable="item_nameColumn" msprop:Generator_ColumnVarNameInTable="columnitem_name" msprop:Generator_UserColumnName="item_name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="expiration_date" msprop:Generator_ColumnPropNameInRow="expiration_date" msprop:Generator_ColumnPropNameInTable="expiration_dateColumn" msprop:Generator_ColumnVarNameInTable="columnexpiration_date" msprop:Generator_UserColumnName="expiration_date" type="xs:dateTime" />
+              <xs:element name="stock_quantity" msprop:Generator_ColumnPropNameInRow="stock_quantity" msprop:Generator_ColumnPropNameInTable="stock_quantityColumn" msprop:Generator_ColumnVarNameInTable="columnstock_quantity" msprop:Generator_UserColumnName="stock_quantity" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
