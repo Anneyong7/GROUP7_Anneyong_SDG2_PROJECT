@@ -29,4 +29,17 @@
         Dim invForm As New Inventory()
         invForm.ShowDialog()
     End Sub
+
+    Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles btnReports.Click
+        Dim invForm As New Reports()
+        invForm.ShowDialog()
+    End Sub
+
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        ' Show a polite message
+        MessageBox.Show("You have been logged out.", "Logout", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        ' Restart the application to show a fresh Login screen
+        Application.Restart()
+    End Sub
 End Class

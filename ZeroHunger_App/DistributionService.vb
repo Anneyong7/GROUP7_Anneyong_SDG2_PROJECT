@@ -11,7 +11,7 @@ Public Class DistributionService
                 conn.Open()
 
                 ' Rule 1: Check current stock and expiration date
-                Dim checkCmd As New SqlCommand("SELECT stock_quantity, expiration_date FROM FoodInventory WHERE item_id = @id", conn)
+                Dim checkCmd As New SqlCommand("SELECT stock_quantity, expiration_date FROM Inventory WHERE item_id = @id", conn)
                 checkCmd.Parameters.AddWithValue("@id", itemId)
 
                 Dim reader As SqlDataReader = checkCmd.ExecuteReader()
@@ -31,7 +31,7 @@ Public Class DistributionService
                 Dim transaction As SqlTransaction = conn.BeginTransaction()
                 Try
                     ' Update Inventory
-                    Dim updateCmd As New SqlCommand("UPDATE FoodInventory SET stock_quantity = stock_quantity - @qty WHERE item_id = @id", conn, transaction)
+                    Dim updateCmd As New SqlCommand("UPDATE Inventory SET stock_quantity = stock_quantity - @qty WHERE item_id = @id", conn, transaction)
                     updateCmd.Parameters.AddWithValue("@qty", quantity)
                     updateCmd.Parameters.AddWithValue("@id", itemId)
                     updateCmd.ExecuteNonQuery()

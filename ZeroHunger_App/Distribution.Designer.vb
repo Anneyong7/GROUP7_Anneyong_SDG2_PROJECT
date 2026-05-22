@@ -30,6 +30,7 @@ Partial Class Distribution
         Me.lblStock = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.btnBack = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cmbItems
@@ -58,7 +59,7 @@ Partial Class Distribution
         '
         Me.btnSubmit.Location = New System.Drawing.Point(263, 284)
         Me.btnSubmit.Name = "btnSubmit"
-        Me.btnSubmit.Size = New System.Drawing.Size(80, 22)
+        Me.btnSubmit.Size = New System.Drawing.Size(80, 32)
         Me.btnSubmit.TabIndex = 3
         Me.btnSubmit.Text = "Submit"
         Me.btnSubmit.UseVisualStyleBackColor = True
@@ -77,17 +78,17 @@ Partial Class Distribution
         '
         Me.lblStock.AutoSize = True
         Me.lblStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStock.Location = New System.Drawing.Point(66, 105)
+        Me.lblStock.Location = New System.Drawing.Point(90, 105)
         Me.lblStock.Name = "lblStock"
-        Me.lblStock.Size = New System.Drawing.Size(160, 20)
+        Me.lblStock.Size = New System.Drawing.Size(55, 20)
         Me.lblStock.TabIndex = 5
-        Me.lblStock.Text = "Available Stock: 0"
+        Me.lblStock.Text = "Items"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(66, 163)
+        Me.Label3.Location = New System.Drawing.Point(90, 163)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(104, 20)
         Me.Label3.TabIndex = 6
@@ -97,17 +98,27 @@ Partial Class Distribution
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(66, 224)
+        Me.Label4.Location = New System.Drawing.Point(90, 224)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(79, 20)
         Me.Label4.TabIndex = 7
         Me.Label4.Text = "Quantity"
+        '
+        'btnBack
+        '
+        Me.btnBack.Location = New System.Drawing.Point(410, 284)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(75, 32)
+        Me.btnBack.TabIndex = 8
+        Me.btnBack.Text = "Back"
+        Me.btnBack.UseVisualStyleBackColor = True
         '
         'Distribution
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(621, 396)
+        Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.lblStock)
@@ -131,4 +142,5 @@ Partial Class Distribution
     Friend WithEvents lblStock As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
+    Friend WithEvents btnBack As Button
 End Class

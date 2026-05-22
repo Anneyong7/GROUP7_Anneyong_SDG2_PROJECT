@@ -37,28 +37,31 @@ Partial Class Inventory
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtCategory = New System.Windows.Forms.TextBox()
+        Me.btnBack = New System.Windows.Forms.Button()
+        Me.txtDonorName = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         CType(Me.dgvInventory, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtItemName
         '
-        Me.txtItemName.Location = New System.Drawing.Point(104, 97)
+        Me.txtItemName.Location = New System.Drawing.Point(142, 134)
         Me.txtItemName.Name = "txtItemName"
-        Me.txtItemName.Size = New System.Drawing.Size(100, 22)
+        Me.txtItemName.Size = New System.Drawing.Size(143, 22)
         Me.txtItemName.TabIndex = 0
         '
         'txtStock
         '
-        Me.txtStock.Location = New System.Drawing.Point(104, 213)
+        Me.txtStock.Location = New System.Drawing.Point(142, 228)
         Me.txtStock.Name = "txtStock"
-        Me.txtStock.Size = New System.Drawing.Size(100, 22)
+        Me.txtStock.Size = New System.Drawing.Size(67, 22)
         Me.txtStock.TabIndex = 2
         '
         'dtpExpiration
         '
         Me.dtpExpiration.Location = New System.Drawing.Point(107, 271)
         Me.dtpExpiration.Name = "dtpExpiration"
-        Me.dtpExpiration.Size = New System.Drawing.Size(231, 22)
+        Me.dtpExpiration.Size = New System.Drawing.Size(257, 22)
         Me.dtpExpiration.TabIndex = 3
         '
         'dgvInventory
@@ -75,7 +78,7 @@ Partial Class Inventory
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(18, 97)
+        Me.Label1.Location = New System.Drawing.Point(18, 134)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(41, 20)
         Me.Label1.TabIndex = 5
@@ -85,7 +88,7 @@ Partial Class Inventory
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(18, 154)
+        Me.Label2.Location = New System.Drawing.Point(18, 183)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(76, 20)
         Me.Label2.TabIndex = 6
@@ -95,7 +98,7 @@ Partial Class Inventory
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(18, 215)
+        Me.Label3.Location = New System.Drawing.Point(18, 228)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(51, 20)
         Me.Label3.TabIndex = 7
@@ -113,9 +116,9 @@ Partial Class Inventory
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(26, 339)
+        Me.btnAdd.Location = New System.Drawing.Point(22, 339)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(75, 23)
+        Me.btnAdd.Size = New System.Drawing.Size(75, 30)
         Me.btnAdd.TabIndex = 9
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = True
@@ -124,7 +127,7 @@ Partial Class Inventory
         '
         Me.btnUpdate.Location = New System.Drawing.Point(120, 339)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 30)
         Me.btnUpdate.TabIndex = 10
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
@@ -133,7 +136,7 @@ Partial Class Inventory
         '
         Me.btnDelete.Location = New System.Drawing.Point(220, 339)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(75, 30)
         Me.btnDelete.TabIndex = 11
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
@@ -166,16 +169,45 @@ Partial Class Inventory
         '
         'txtCategory
         '
-        Me.txtCategory.Location = New System.Drawing.Point(104, 154)
+        Me.txtCategory.Location = New System.Drawing.Point(142, 183)
         Me.txtCategory.Name = "txtCategory"
-        Me.txtCategory.Size = New System.Drawing.Size(100, 22)
+        Me.txtCategory.Size = New System.Drawing.Size(143, 22)
         Me.txtCategory.TabIndex = 16
+        '
+        'btnBack
+        '
+        Me.btnBack.Location = New System.Drawing.Point(22, 415)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(75, 23)
+        Me.btnBack.TabIndex = 17
+        Me.btnBack.Text = "Back"
+        Me.btnBack.UseVisualStyleBackColor = True
+        '
+        'txtDonorName
+        '
+        Me.txtDonorName.Location = New System.Drawing.Point(142, 89)
+        Me.txtDonorName.Name = "txtDonorName"
+        Me.txtDonorName.Size = New System.Drawing.Size(143, 22)
+        Me.txtDonorName.TabIndex = 18
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(18, 91)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(104, 20)
+        Me.Label5.TabIndex = 19
+        Me.Label5.Text = "Donor Name"
         '
         'Inventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1094, 450)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.txtDonorName)
+        Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.txtCategory)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.txtSearch)
@@ -214,4 +246,7 @@ Partial Class Inventory
     Friend WithEvents Label6 As Label
     Friend WithEvents txtCategory As TextBox
     Friend WithEvents txtSearch As TextBox
+    Friend WithEvents btnBack As Button
+    Friend WithEvents txtDonorName As TextBox
+    Friend WithEvents Label5 As Label
 End Class

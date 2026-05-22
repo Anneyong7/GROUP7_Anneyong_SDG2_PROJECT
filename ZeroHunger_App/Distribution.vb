@@ -2,62 +2,102 @@
 
 Public Class Distribution
 
+    ' 1. Database Connection String
     Dim connectionString As String = "Server=(localdb)\MSSQLLocalDB;Database=SDG2_ZeroHungerDB;Integrated Security=True;"
 
-    ' 1. Load the items when the form opens
-    Private Sub DistributionForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    ' 2. Form Activated Event (Refreshes data every time you open or return to this screen)
+    Private Sub DistributionForm_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        LoadInventoryItems()
+    End Sub
+
+    ' 3. Method to Load Available Stock into the ComboBox
+    Private Sub LoadInventoryItems()
         Try
             Using conn As New SqlConnection(connectionString)
-                ' Only show items that have stock and are not expired
-                Dim query As String = "SELECT item_id, item_name, stock_quantity FROM FoodInventory WHERE stock_quantity > 0 AND expiration_date >= GETDATE()"
+                Dim query As String = "SELECT item_id, item_name + ' (Qty: ' + CAST(stock_quantity AS VARCHAR) + ')' AS display_info FROM Inventory WHERE stock_quantity > 0"
                 Dim adapter As New SqlDataAdapter(query, conn)
                 Dim table As New DataTable()
                 adapter.Fill(table)
 
-                ' Link the data to the drop-down menu
+                ' Safely reset and fill the ComboBox
+                cmbItems.DataSource = Nothing
+                cmbItems.DisplayMember = "display_info"
+                cmbItems.ValueMember = "item_id"
                 cmbItems.DataSource = table
-                cmbItems.DisplayMember = "item_name" ' What the user sees
-                cmbItems.ValueMember = "item_id"     ' The hidden ID it sends to the database
             End Using
         Catch ex As Exception
             MessageBox.Show("Error loading items: " & ex.Message, "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
-    ' 2. Update the stock label when they pick a new item
-    Private Sub cmbItems_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbItems.SelectedIndexChanged
-        If cmbItems.SelectedIndex <> -1 Then
-            Dim row As DataRowView = DirectCast(cmbItems.SelectedItem, DataRowView)
-            lblStock.Text = "Available Stock: " & row("stock_quantity").ToString()
-        End If
-    End Sub
-
-    ' 3. Submit the distribution
+    ' 4. The Save Button (Processes the distribution)
     Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+        Try
+            ' Validation: Check if everything is filled out
+            If cmbItems.SelectedValue Is Nothing OrElse String.IsNullOrWhiteSpace(txtBeneficiary.Text) OrElse String.IsNullOrWhiteSpace(txtQuantity.Text) Then
+                MessageBox.Show("Please fill in all fields.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
 
-        If cmbItems.SelectedIndex = -1 Or txtBeneficiary.Text = "" Or txtQuantity.Text = "" Then
-            MessageBox.Show("Please fill all fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
+            Dim selectedItemId As Integer = Convert.ToInt32(cmbItems.SelectedValue)
+            Dim qtyToGive As Integer = Convert.ToInt32(txtQuantity.Text)
+            Dim beneficiary As String = txtBeneficiary.Text
 
-        ' Grab the hidden item_id from the ComboBox
-        Dim selectedItemId As Integer = Convert.ToInt32(cmbItems.SelectedValue)
+            Using conn As New SqlConnection(connectionString)
+                conn.Open()
 
-        Dim service As New DistributionService()
-        Dim result As String = service.ProcessDistribution(selectedItemId, txtBeneficiary.Text, Convert.ToInt32(txtQuantity.Text))
+                ' JOB A: Check if we have enough stock left in the database
+                Dim checkQuery As String = "SELECT stock_quantity FROM Inventory WHERE item_id = @id"
+                Dim currentStock As Integer = 0
+                Using checkCmd As New SqlCommand(checkQuery, conn)
+                    checkCmd.Parameters.AddWithValue("@id", selectedItemId)
+                    currentStock = Convert.ToInt32(checkCmd.ExecuteScalar())
+                End Using
 
-        If result = "Success" Then
-            MessageBox.Show("Food distributed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                If qtyToGive > currentStock Then
+                    MessageBox.Show("Not enough stock! We only have " & currentStock & " left.", "Stock Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+
+                ' JOB B: Save the record to the Distributions table using the ITEM NAME
+                Dim itemName As String = cmbItems.Text.Split("("c)(0).Trim() ' Cleans up the name
+
+                Dim distQuery As String = "INSERT INTO Distributions (item_name, beneficiary_name, quantity_given) VALUES (@name, @beneficiary, @qty)"
+                Using distCmd As New SqlCommand(distQuery, conn)
+                    distCmd.Parameters.AddWithValue("@name", itemName)
+                    distCmd.Parameters.AddWithValue("@beneficiary", beneficiary)
+                    distCmd.Parameters.AddWithValue("@qty", qtyToGive)
+                    distCmd.ExecuteNonQuery()
+                End Using
+
+                ' JOB C: Subtract the given amount from the Inventory table
+                Dim updateQuery As String = "UPDATE Inventory SET stock_quantity = stock_quantity - @qty WHERE item_id = @id"
+                Using updateCmd As New SqlCommand(updateQuery, conn)
+                    updateCmd.Parameters.AddWithValue("@qty", qtyToGive)
+                    updateCmd.Parameters.AddWithValue("@id", selectedItemId)
+                    updateCmd.ExecuteNonQuery()
+                End Using
+
+                MessageBox.Show("Distribution saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End Using
+
+            ' Clear textboxes and instantly refresh the dropdown list
             txtBeneficiary.Clear()
             txtQuantity.Clear()
-            DistributionForm_Load(Nothing, Nothing) ' Refresh the drop-down to show the new stock
-        Else
-            MessageBox.Show(result, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End If
+            LoadInventoryItems()
 
+        Catch ex As Exception
+            MessageBox.Show("Error processing distribution: " & ex.Message, "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
-    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+    ' 5. The Back Button
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        ' Closes the window and reveals the dashboard behind it
+        Me.Close()
+    End Sub
+
+    Private Sub lblStock_Click(sender As Object, e As EventArgs) Handles lblStock.Click
 
     End Sub
 End Class
