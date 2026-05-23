@@ -19,10 +19,10 @@ Through this project, organizations can manage food supplies more efficiently an
 
 # INSTALLATION STEPS
 1. Set Up the Database
--Open your project in Visual Studio.
--Open the SQL Server Object Explorer window.
--Open the Database_Script.sql file.
--Click the green Execute button. This will clear any old connections, create a fresh SDG2_ZeroHungerDB database, build the correct tables, and create the default user accounts.
+- Open your project in Visual Studio.
+- Open the SQL Server Object Explorer window.
+- Open the Database_Script.sql file.
+- Click the green Execute button. This will clear any old connections, create a fresh SDG2_ZeroHungerDB database, build the correct tables, and create the default user accounts.
 
 3. Verify the Connection
 - Ensure you are using Visual Studio's local database feature. The connection string inside the VB.NET code is already configured to:
@@ -33,8 +33,8 @@ Through this project, organizations can manage food supplies more efficiently an
 - Click the Start button at the top of Visual Studio.
 - When the login screen appears, use the default administrator credentials:
 
-Username: admin
-Password: admin123
+- Username: admin
+- Password: admin123
 
 You are now ready to add inventory, record donations, and distribute food.
 
