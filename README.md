@@ -1,5 +1,5 @@
 # SDG 2: Zero Hunger Food Inventory and Distribution Management System
-#PROJECT OVERVIEW
+# PROJECT OVERVIEW
 
 The SDG 2: Zero Hunger Food Inventory and Distribution Management System is a desktop-based application developed using VB.NET and SQL Server. The main objective of the system is to help organizations properly manage donated food items, monitor inventory stocks, distribute food supplies, and generate reports efficiently.
 
@@ -17,7 +17,7 @@ Expiration Monitoring
 
 Through this project, organizations can manage food supplies more efficiently and provide better service to beneficiaries and communities.
 
-#INSTALLATION STEPS
+# INSTALLATION STEPS
 1. Set Up the Database
 -Open your project in Visual Studio.
 -Open the SQL Server Object Explorer window.
