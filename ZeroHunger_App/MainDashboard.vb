@@ -12,12 +12,18 @@
     ' This runs exactly when the dashboard opens
     Private Sub MainDashboardForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        ' If they are not an Admin, hide the restricted buttons
-        If currentUserRole <> "Admin" Then
-            btnInventory.Visible = False
-            btnReports.Visible = False
-        End If
+        If currentUserRole = "Admin" Then
+            ' Admin sees everything
+            btnInventory.Visible = True
+            btnDistribute.Visible = True
+            btnReports.Visible = True
 
+        ElseIf currentUserRole = "staff" Then
+            ' Staff restrictions
+            btnInventory.Visible = False
+            btnDistribute.Visible = True
+            btnReports.Visible = True
+        End If
     End Sub
 
     Private Sub btnDistribute_Click(sender As Object, e As EventArgs) Handles btnDistribute.Click
